@@ -7,19 +7,19 @@ class Key {
 }
 
 class Person {
-  private key: Key;
-  constructor(key: Key) {
-    this.key = key;
-  }
+
+    constructor(private key: Key) {
+      }
   getKey(): Key {
     return this.key;
   }
 }
 
 abstract class House {
-  protected door: boolean = false;
-  protected key: Key;
-  protected tenants: Person[] = [];
+    protected door: boolean = false;
+    protected tenants: Person[] = [];
+    constructor(protected key: Key) {
+      }
   abstract openDoor(key: Key): void;
   comeIn(tenant: Person): void {
     if (this.door) {
@@ -38,7 +38,7 @@ class MyHouse extends House {
 
 const key = new Key();
 
-const house = new MyHouse();
+const house = new MyHouse(key);
 const person = new Person(key);
 
 house.openDoor(person.getKey());
